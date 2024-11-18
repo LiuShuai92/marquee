@@ -91,7 +91,7 @@ class _IntegralCurve extends Curve {
 ///   scrolling and manual scrolling enabled.
 class Marquee extends StatefulWidget {
   Marquee({
-    super.key,
+    Key? key,
     required this.text,
     this.style,
     this.textScaleFactor,
@@ -145,7 +145,8 @@ class Marquee extends StatefulWidget {
           "isn't invented yet.",
         ),
         this.accelerationCurve = _IntegralCurve(accelerationCurve),
-        this.decelerationCurve = _IntegralCurve(decelerationCurve);
+        this.decelerationCurve = _IntegralCurve(decelerationCurve),
+        super(key: key);
 
   /// The text to be displayed.
   ///
@@ -532,9 +533,11 @@ class _MarqueeState extends State<Marquee> with SingleTickerProviderStateMixin {
   bool _running = false;
   bool _isOnPause = false;
   int _roundCounter = 0;
+
   bool get isDone => widget.numberOfRounds == null
       ? false
       : widget.numberOfRounds == _roundCounter;
+
   bool get showFading =>
       !widget.showFadingOnlyWhenScrolling ? true : !_isOnPause;
 
